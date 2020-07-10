@@ -1,0 +1,15 @@
+{% extends 'network/layout.html' %}
+
+{% block body %}
+<div class="container" style="padding: 10px; margin:10px; background-color: white; border:1px black solid">
+    <h4 class="display-4">Create new Post</h4>
+    <form method=post action="{% url 'newpost' username=user.username %}">
+        {% csrf_token %}
+        <textarea cols="152" rows="10" name="textarea">
+
+        </textarea>
+        <br>
+        <button class="btn btn-outline-dark" type="submit" value="Create"><i class="fa fa-check-square-o"></i> Create</button>
+    </form>
+</div>
+{% endblock %}

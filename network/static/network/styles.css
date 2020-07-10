@@ -1,0 +1,46 @@
+body{
+    background-color: #f2f4f5;
+}
+
+.navbar{
+    background-color:white !important;
+    border-bottom: solid #e1e4e6 1px;
+}
+
+.likebutton ,.edit{
+    color:#454545;
+}
+
+.card-header{
+    font-size:20px;
+    font-family:  monospace;
+}
+
+.card-subtitle{
+    font-size:14px;
+}
+
+.card-text{
+    font-size:24px;
+    color:black;
+}
+
+.network{
+    font-size: 26px;
+    color:black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.details-follow{
+    font-size: 24px;
+    margin:10px;
+    color: #454545;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.details-name{
+    font-size: 34px;
+    margin:10px;
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
