@@ -38,9 +38,9 @@
                 {% if request.user == post.user %}
                 <a href="{% url 'edit' post_id=post.id%}" class="edit" style="right: 20px;">Edit</a>
                 {% elif request.user in post.liked.all %}
-                    <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Unlike" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="margin-right: 4px; color:red;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
+                    <a class="likebutton" href="javascript:void(0)" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Unlike" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="margin-right: 4px; color:red;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
                     {% else %}
-                    <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Like" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="margin-right: 4px; color:black;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
+                    <a class="likebutton" href="javascript:void(0)" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Like" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="margin-right: 4px; color:black;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
                 {% endif %}
             {% else %}
                 <p>Likes: {{post.liked.all.count}}</p>
