@@ -11,9 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import User, Post, Profile, Like
 
 class Edit(forms.Form):
-    textarea = forms.CharField(widget=forms.Textarea(attrs={'rows': 1,
-                              'cols': 152, 'rows':10}), label='')
-
+    textarea = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control'}), label='')
 
 def index(request):
 
