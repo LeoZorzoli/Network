@@ -2,45 +2,248 @@ body{
     background-color: #f2f4f5;
 }
 
-.navbar{
-    background-color:white !important;
-    border-bottom: solid #e1e4e6 1px;
+i{
+    margin-right: 2px;
 }
 
-.likebutton ,.edit{
-    color:#454545;
+@media only screen and (min-width: 600px){
+
+    .card{
+        width:auto; 
+        margin:6px;
+    }
+
+    .navbar{
+        width: 100%;
+        background-color:white !important;
+        border-bottom: solid #e1e4e6 1px;
+    }
+
+    .nav-link{
+        font-size: 74px;
+    }
+    
+    .likebutton ,.edit{
+        font-size: 32px;
+        color:#454545;
+    }
+    
+    .card-header{
+        font-size:46px;
+        font-family:  monospace;
+    }
+    
+    .card-subtitle{
+        font-size:28px;
+    }
+    
+    .card-text{
+        font-size:34px;
+        color:black;
+    }
+
+    .page-item{
+        font-size: 36px;
+    }
+    
+    .network{
+        display: none;
+    }
+    
+    .details-follow{
+        font-size: 40px;
+        margin:10px;
+        color: #454545;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    
+    .details-name{
+        font-size: 54px;
+        margin:10px;
+        color: black;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .btn-follow{
+        font-size: 56px;
+    }
+    
+    a{
+        color: black;
+    }
+
+    a:hover{
+        color: grey;
+        text-decoration: none;
+    }
+
+    .class-post{
+        padding: 10px; 
+        background-color: white; 
+        margin: 10px; 
+        margin-top: 40px;
+        border: 1px solid black;
+    }
+
+    .form-control{
+        font-size: 46px;
+    }
+
+    .save{
+        font-size: 36px;
+    }
+
+    .login{
+        background-color: white; 
+        padding: 16px; 
+        margin: 10px;
+        margin-top: 10%;
+
+    }
+
+    .login-buttom{
+        margin-bottom: 6px;
+    }
+
+    .profile{
+        border: 1px solid black; 
+        padding: 10px; 
+        background-color: white; 
+        margin: 6px;
+    }
+
+    .info-form{
+        margin-top: 10px;
+        font-size: 32px;
+    }
+
+    .total-likes{
+        font-size: 32px;
+    }
 }
 
-.card-header{
-    font-size:20px;
-    font-family:  monospace;
-}
+@media only screen and (min-width: 1025px){
 
-.card-subtitle{
-    font-size:14px;
-}
+    .card{
+        width:auto; 
+        margin:6px;
+    }
 
-.card-text{
-    font-size:24px;
-    color:black;
-}
+    .navbar{
+        background-color:white !important;
+        border-bottom: solid #e1e4e6 1px;
+    }
+    .mr-auto{
+        margin-left: 20%;
+    }
+    .ml-auto{
+        margin-right: 20%;
+    }
 
-.network{
-    font-size: 26px;
-    color:black;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
+    .nav-link{
+        font-size: 26px;
+    }
+    
+    .likebutton ,.edit{
+        font-size: 16px;
+        color:#454545;
+    }
+    
+    .card-header{
+        font-size:20px;
+        font-family:  monospace;
+    }
+    
+    .card-subtitle{
+        font-size:14px;
+    }
+    
+    .card-text{
+        font-size:24px;
+        color:black;
+    }
 
-.details-follow{
-    font-size: 24px;
-    margin:10px;
-    color: #454545;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
+    .page-item{
+        font-size: 16px;
+    }
 
-.details-name{
-    font-size: 34px;
-    margin:10px;
-    color: black;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    .network{
+        display: initial;
+        font-size: 26px;
+        color:black;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .btn-follow{
+        font-size: 30px;
+    }
+
+    .btn-follow:hover{
+        color:grey;
+    }
+
+
+    a{
+        color: black;
+    }
+
+    a:hover{
+        color: grey;
+        text-decoration: none;
+    }
+    
+    .details-follow{
+        font-size: 24px;
+        margin:10px;
+        color: #454545;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    
+    .details-name{
+        font-size: 34px;
+        margin:10px;
+        color: black;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .class-post{
+        padding: 10px; 
+        background-color: white; 
+        margin: 10px; 
+        border: 1px solid black
+    }
+
+    .form-control{
+        font-size: 16px;
+    }
+
+    .login{
+        background-color: white; 
+        padding: 16px; 
+        margin: 10px;
+    }
+
+    .login-buttom{
+        margin-bottom: 6px;
+    }
+
+    .profile{
+        border: 1px solid black; 
+        padding: 10px; 
+        background-color: white; 
+        margin: 6px;
+    }   
+
+    .save{
+        font-size: 16px;
+    }
+
+    .info-form{
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+    .total-likes{
+        font-size: 16px;
+    }
 }
