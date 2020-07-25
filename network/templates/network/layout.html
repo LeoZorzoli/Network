@@ -8,48 +8,40 @@
         <link href="{% static 'network/styles.css' %}" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
+        </head>
     <body>
         
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container">  
-                    <a class="navbar-brand network" href="{% url 'index' %}"><code>Network</code></a>
-                    <div>
+            <nav class="navbar navbar-expand-lg navbar-expand-md navbar-light bg-light">
                         <ul class="navbar-nav mr-auto">
-                            {% if user.is_authenticated %}
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item dropdown">
-                                  <a class="nav-link" href="{% url 'profile' username=user.username %}">
-                                    <i class="fa fa-user-circle-o" style="margin-right: 2px;"></i>{{ request.user|title }}
-                                  </a>
-                                
-                                </li>              
-                              </ul>
-                            {% endif %}
                             <li class="nav-item">
-                            <a class="nav-link " href="{% url 'index' %}"><i class="fa fa-home" style="margin-right: 1px;"></i>All Posts</a>
+                                <a class="nav-link" title="Home" href="{% url 'index' %}"><i class="fa fa-home"></i></a>
                             </li>
                             {% if user.is_authenticated %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'newpost' username=user.username %}"><i class="fa fa-pencil-square-o" style="margin-right: 1px;"></i>New Post</a>
+                                    <a class="nav-link" title="New Post" href="{% url 'newpost' username=user.username %}"><i class="fa fa-pencil-square-o"></i></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'following' username=user.username %}"><i class="fa fa-heartbeat" style="margin-right: 1px;"></i>Following</a>
+                                    <a class="nav-link" title="Following" href="{% url 'following' username=user.username %}"><i class="fa fa-heartbeat"></i></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out" style="margin-right: 1px;"></i>Logout</a>
-                                </li>
-                            {% else %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-drivers-license-o" style="margin-right: 1px;"></i>Log In</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'register' %}"><i class="fa fa-plus-square" style="margin-right: 1px;"></i>Register</a>
-                                </li>
-                            {% endif %}
                         </ul>
-                    </div>
-                </div>   
+                        <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" title="My Profile" href="{% url 'profile' username=user.username %}"><i class="fa fa-user-circle-o"></i></a>    
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" title="Log Out" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i></a>
+                                </li>      
+                            {% else %}
+                        </ul>
+                        <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" title="Log In" href="{% url 'login' %}"><i class="fa fa-drivers-license-o"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" title="Register" href="{% url 'register' %}"><i class="fa fa-plus-square"></i></a>
+                                </li>
+                        </ul>
+                            {% endif %} 
             </nav>
         <div class="container">
             <div class="body">
@@ -99,7 +91,6 @@
                     $( this ).attr( 'href','javascript:void(0);' )
                 });
             });
-        </script>
-        
+        </script> 
 </html>
 

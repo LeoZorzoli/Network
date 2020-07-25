@@ -2,13 +2,12 @@
 {% load static %}
 
 {% block body %}
-<div class="container" style="padding: 10px; background-color: white; margin: 10px; border: 1px solid black">
-    <h3 class="display-4">Edit</h3>
+<div class="class-post">
     <form method="post"> 
         {% csrf_token %}
         {{edit}}
         <br>
-        <button class="btn btn-outline-dark" type="submit" value="Save"><i class="fa fa-floppy-o"></i> Save</button>
+        <button class="save btn btn-outline-dark" type="submit" value="Save"><i class="fa fa-floppy-o"></i> Save</button>
     </form>
 </div>
 {% endblock %}

@@ -1,8 +1,7 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-<div class="container" style="background-color: white; padding: 16px; margin: 10px;">
-    <h2 class="display-4">Register</h2>
+<div class="container login">
 
     {% if message %}
         <div>{{ message }}</div>
@@ -22,9 +21,9 @@
         <div class="form-group">
             <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
         </div>
-        <input class="btn btn-outline-dark" style="margin-bottom: 6px;" type="submit" value="Register">
+        <input class="btn btn-outline-dark login-buttom save" type="submit" value="Register">
     </form>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    <p class="info-form">Already have an account? <a href="{% url 'login' %}">Log In here.</a></p>
 <div>
 {% endblock %}

@@ -1,46 +1,53 @@
 {% extends 'network/layout.html' %}
 {% load static %}
 
+{% block title %}
+    {% if profileuser.first_name and profileuser.last_name %}
+    {{profileuser.first_name|title}} {{profileuser.last_name|title}} | Network
+    {% else %}
+    {{profileuser.username|title}} | Network
+    {% endif %}
+{% endblock %}
+
 {% block body %}
 
-<div class="container" >
-    <div style="border: 1px solid black; padding: 10px; background-color: white; margin: 6px;">
-        <h3 class="display-4">Profile details</h3>
-        <hr>
+
+    <div class="profile">
         <h4 class="details-name">Username: {{profileuser.username|title}}</h4>
+        <hr>
         <h4 class="details-follow" >Followers: {{follower}}</h4>
         <h4 class="details-follow">Following: {{following}}</h4>
         {% if user.username != profileuser.username %}
             {% if not followingEachOther %}
             <form class="text-right" method="post" action="{% url 'profile' username=profileuser.username %}">
                 {% csrf_token %}
-                <button class="btn btn-outline-dark" type="submit" value="Follow"><i class="fa fa-child"> Follow</i></button>
+                <button class="btn-follow btn" type="submit" value="Follow"><i class="fa fa-user-plus"></i></button>
             </form>
             {% elif followingEachOther %}
             <form class="text-right" method="post" action="{% url 'profile' username=profileuser.username %}">
                 {% csrf_token %}
-               <button class="btn btn-outline-dark" type="submit" value="Unfollow"><i class="fa fa-window-close-o"> Unfollow</i></button>
+               <button class="btn-follow btn" type="submit" value="Unfollow"><i class="fa fa-user-times"></i></button>
             </form>
             {% endif %}
         {% endif %}
     </div>
     
-</div>
+
 
 <div class="container">
     {% for post in page_obj %}
-    <div class="card border-secondary mb-3" style="width:auto; margin:6px;">
+    <div class="card border-secondary mb-3">
         <h5 class="card-header"><a href="{% url 'profile' username=post.user %}">{{post.user|title}}</a></h5>
         <div class="card-body text-secondary">
             <h6 class="card-subtitle mb-2 text-muted">{{post.date}}</h6>
             <p class="card-text">{{post.content}}</p>
             {% if user.is_authenticated %}
                 {% if request.user == post.user %}
-                <a href="{% url 'edit' post_id=post.id%}" class="edit" style="right: 20px;">Edit</a>
+                <a href="{% url 'edit' post_id=post.id%}" class="edit">Edit</a>
                 {% elif request.user in post.liked.all %}
-                    <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Unlike" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="margin-right: 4px; color:red;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
+                    <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Unlike" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="color:red;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
                     {% else %}
-                    <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Like" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="margin-right: 4px; color:black;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
+                    <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Like" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="color:black;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
                 {% endif %}
             {% else %}
                 <p>Likes: {{post.liked.all.count}}</p>
@@ -56,15 +63,10 @@
             <li class="page-item"><a href="?page=1" class="page-link">&laquo; First</a></li>
             <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a></li>
         {% else %}
-        <li class="page-item disabled"><a class="page-link">&laquo; First</a></li>
-        <li class="page-item disabled"><a class="page-link">Previous</a></li>
+            <li class="page-item disabled"><a class="page-link">&laquo; First</a></li>
+            <li class="page-item disabled"><a class="page-link">Previous</a></li>
         {% endif %}
-            
-
-        
             <li class="page-item"><a class="page-link">{{ page_obj.number }}</a></li>
-        
-
         {% if page_obj.has_next %}
         <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a></li>
         <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">Last &raquo;</a></li>

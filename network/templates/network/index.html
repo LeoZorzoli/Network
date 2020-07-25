@@ -3,21 +3,21 @@
 
 {% block body %}
 {% for post in page_obj %}
-<div class="card border-secondary mb-3" style="width:auto; margin:6px;">
+<div class="card border-secondary mb-3">
     <h5 class="card-header"><a href="{% url 'profile' username=post.user %}">{{post.user|title}}</a></h5>
     <div class="card-body text-secondary">
       <h6 class="card-subtitle mb-2 text-muted">{{post.date}}</h6>
       <p class="card-text">{{post.content}}</p>
         {% if user.is_authenticated %}
             {% if request.user == post.user %}
-            <a href="{% url 'edit' post_id=post.id%}" class="edit" style="right: 20px;">Edit</a>
+            <a href="{% url 'edit' post_id=post.id%}" class="edit">Edit</a>
             {% elif request.user in post.liked.all %}
-            <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Unlike" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="margin-right: 4px; color:red;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
+            <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Unlike" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="color:red;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
             {% else %}
-            <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Like" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="margin-right: 4px; color:black;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
+            <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Like" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="color:black;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
             {% endif %}
         {% else %}
-            <p>Likes: {{post.liked.all.count}}</p>
+            <p class="total-likes">Likes: {{post.liked.all.count}}</p>
         {% endif %}
     </div>
 </div>
