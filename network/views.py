@@ -92,8 +92,8 @@ def profile(request, username):
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
 
-            return render(request, "network/profile.html", {'profileuser': profileuser,
-            'page_obj': page_obj, 'follower':totalfollower, 'following': totalfollowing,
+            return render(request, "network/profile.html", {'posts': posts.count(), 'profileuser': profileuser,
+            'page_obj': page_obj, 'follower': follower, 'totalfollower':totalfollower, 'following': following, 'totalfollowing': totalfollowing,
             'followingEachOther': following_each_other})
         
     else:
@@ -113,8 +113,9 @@ def profile(request, username):
             totalfollower = len(follower)
             totalfollowing = len(following)
 
-            return render(request, "network/profile.html", {'profileuser': profileuser, 
-            'page_obj': page_obj, 'follower': totalfollower, 'following': totalfollowing,
+            return render(request, "network/profile.html", {'posts': posts.count(), 'profileuser': profileuser, 
+            'page_obj': page_obj, 'follower': follower, 'following': following,
+            'totalfollowing': totalfollowing, 'totalfollower': totalfollower,
             'followingEachOther': following_each_other})
 
         else:
@@ -124,8 +125,9 @@ def profile(request, username):
             totalfollower = len(follower)
             totalfollowing = len(following)
        
-            return render(request, "network/profile.html", {'profileuser': profileuser, 
-            'page_obj': page_obj, 'follower': totalfollower, 'following': totalfollowing,
+            return render(request, "network/profile.html", {'posts': posts.count(), 'profileuser': profileuser, 
+            'page_obj': page_obj, 'follower': follower, 'following': following, 
+            'totalfollowing': totalfollowing, 'totalfollower': totalfollower,
             'followingEachOther': following_each_other})
 
 
@@ -193,3 +195,26 @@ def like_post(request):
         
         return HttpResponse('Success')
     
+def config(request, username):
+    user = request.user
+    if request.method == 'GET':
+        profile = User.objects.get(username=username)
+        if request.user.is_anonymous:
+            return redirect("login")
+        if profile.username == user.username:
+            return render(request, "network/config.html", {'profile': profile})
+        else:
+            return redirect("index")
+        
+
+    else: 
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
+        email = request.POST["email"]
+
+        profile = User.objects.get(username=username)
+        profile.first_name = first_name
+        profile.last_name = last_name
+        profile.email = email
+        profile.save()
+        return redirect('profile', profile.username)
