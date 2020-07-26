@@ -50,47 +50,49 @@
             </div>
         </div>
 
-        <script>
-            $('.likebutton').click(function(){
-                var catid;
-                var total;
-                var value;
-                catid = $(this).data("catid");
-                
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script>
+        $('.likebutton').click(function(){
+            var catid;
+            var total;
+            var value;
+            catid = $(this).data("catid");
+            
 
-                $.ajax(
+            $.ajax(
+            {
+                type:"GET",
+                url: "/likepost",
+                data:{
+                        post_id: catid
+                },
+                success: function( data ) 
                 {
-                    type:"GET",
-                    url: "/likepost",
-                    data:{
-                            post_id: catid
-                    },
-                    success: function( data ) 
-                    {
-                        total = $('#'+ catid).attr("data-total")
-                        if ($('#'+catid).attr("data-value") == 'Like'){
-                            $( '#liked'+catid ).text((parseInt(total) + 1));
-                            $( '#heart'+catid ).css('color', 'red')
-                            $('#'+catid).attr("data-total", parseInt(total) + 1)
-                            $('#'+catid).attr("data-value", 'Unlike')
-                        }
-                        else{
-                            $( '#liked'+catid ).text((parseInt(total) - 1));
-                            $( '#heart'+catid ).css('color', 'black')
-                            $('#'+catid).attr("data-total", parseInt(total) - 1)
-                            $('#'+catid).attr("data-value", 'Like')
-                        }
+                    total = $('#'+ catid).attr("data-total")
+                    if ($('#'+catid).attr("data-value") == 'Like'){
+                        $( '#liked'+catid ).text((parseInt(total) + 1));
+                        $( '#heart'+catid ).css('color', 'red')
+                        $('#'+catid).attr("data-total", parseInt(total) + 1)
+                        $('#'+catid).attr("data-value", 'Unlike')
                     }
-                })
-
-                
+                    else{
+                        $( '#liked'+catid ).text((parseInt(total) - 1));
+                        $( '#heart'+catid ).css('color', 'black')
+                        $('#'+catid).attr("data-total", parseInt(total) - 1)
+                        $('#'+catid).attr("data-value", 'Like')
+                    }
+                }
             })
 
-            $(function() {
-                $( 'a[href$="#"]' ).each(function() {
-                    $( this ).attr( 'href','javascript:void(0);' )
-                });
+            
+        })
+
+        $(function() {
+            $( 'a[href$="#"]' ).each(function() {
+                $( this ).attr( 'href','javascript:void(0);' )
             });
-        </script> 
+        });
+    </script> 
 </html>
 

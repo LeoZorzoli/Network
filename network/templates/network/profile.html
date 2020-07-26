@@ -12,25 +12,70 @@
 {% block body %}
 
 
-    <div class="profile">
-        <h4 class="details-name">Username: {{profileuser.username|title}}</h4>
-        <hr>
-        <h4 class="details-follow" >Followers: {{follower}}</h4>
-        <h4 class="details-follow">Following: {{following}}</h4>
-        {% if user.username != profileuser.username %}
-            {% if not followingEachOther %}
-            <form class="text-right" method="post" action="{% url 'profile' username=profileuser.username %}">
-                {% csrf_token %}
-                <button class="btn-follow btn" type="submit" value="Follow"><i class="fa fa-user-plus"></i></button>
-            </form>
-            {% elif followingEachOther %}
-            <form class="text-right" method="post" action="{% url 'profile' username=profileuser.username %}">
-                {% csrf_token %}
-               <button class="btn-follow btn" type="submit" value="Unfollow"><i class="fa fa-user-times"></i></button>
-            </form>
-            {% endif %}
+<div class="profile">
+    {% if profileuser.first_name and profileuser.last_name %}
+    <h4 class="details-name">{{profileuser.first_name|title}} {{profileuser.last_name|title}}
+    {% else %}   
+    <h4 class="details-name">{{profileuser.username|title}}</h4>
+    {% endif %}  
+    </h4>
+    <p><span class="btn-total-follow">{{posts}} Posts </span>
+        <button type="button" class="btn-total-follow" data-toggle="modal" data-target="#followers">{{totalfollower}} Followers </button>
+        <button type="button" class="btn-total-follow" data-toggle="modal" data-target="#following">{{totalfollowing}} Following </button>
+    </p>
+    {% if user.username != profileuser.username %}
+        {% if not followingEachOther %}
+        <form class="text-right" method="post" action="{% url 'profile' username=profileuser.username %}">
+            {% csrf_token %}
+            <button class="btn-follow btn" type="submit" value="Follow"><i class="fa fa-user-plus"></i></button>
+        </form>
+        {% elif followingEachOther %}
+        <form class="text-right" method="post" action="{% url 'profile' username=profileuser.username %}">
+            {% csrf_token %}
+            <button class="btn-follow btn" type="submit" value="Unfollow"><i class="fa fa-user-times"></i></button>
+        </form>
         {% endif %}
+    {% else %}
+    <div class="text-right">
+        <a class="btn-config btn" href="{% url 'config' username=request.user %}"><i class="fa fa-cog"></i></a>
     </div>
+    {% endif %}
+</div>
+  <div class="modal fade" id="followers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title details-name" id="exampleModalLongTitle">Total Followers: {{totalfollower}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        {% for follow in follower %}
+        <p class="card-header"><a href="{% url 'profile' username=follow.follower %}">{{follow.follower|title}}</a></p>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="following" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title details-name" id="exampleModalLongTitle">Total Following: {{totalfollowing}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        {% for follow in following %}
+        <p class="card-header"><a href="{% url 'profile' username=follow.target %}">{{follow.target|title}}</a></p>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
     
 
 

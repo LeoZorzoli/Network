@@ -1,0 +1,30 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+<div class="container login">
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'config' username=request.user %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="label-config"><strong>First Name</strong></label>
+            <input class="form-control" type="text" name="first_name" placeholder="First Name" value="{{user.first_name|title}}">
+        </div>
+        <div class="form-group">
+            <label class="label-config"><strong>Last Name</strong></label>
+            <input class="form-control" type="text" name="last_name" placeholder="Last Name" value="{{user.last_name|title}}">
+        </div>
+        <div class="form-group">
+            <label class="label-config"><strong>Email</strong></label>
+            <input class="form-control" type="email" name="email" placeholder="Email" value="{{user.email}}">
+        </div>
+        <input class="btn btn-outline-dark login-buttom save" type="submit" value="Save">
+    </form>
+
+
+</div>
+
+{% endblock %}
