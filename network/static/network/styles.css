@@ -67,6 +67,16 @@ i{
     .btn-follow{
         font-size: 56px;
     }
+
+    .btn-config{
+        font-size: 56px;
+    }
+
+    .btn-total-follow{
+        font-size: 38px;
+        background-color: transparent;
+        border: none;
+    }
     
     a{
         color: black;
@@ -110,6 +120,7 @@ i{
         padding: 10px; 
         background-color: white; 
         margin: 6px;
+        text-align: center;
     }
 
     .info-form{
@@ -119,6 +130,10 @@ i{
 
     .total-likes{
         font-size: 32px;
+    }
+
+    .label-config{
+        font-size: 36px;
     }
 }
 
@@ -167,13 +182,6 @@ i{
         font-size: 16px;
     }
 
-    .network{
-        display: initial;
-        font-size: 26px;
-        color:black;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    }
-
     .btn-follow{
         font-size: 30px;
     }
@@ -182,6 +190,11 @@ i{
         color:grey;
     }
 
+    .btn-total-follow{
+        font-size: 16px;
+        background-color: transparent;
+        border: none;
+    }
 
     a{
         color: black;
@@ -232,6 +245,7 @@ i{
         padding: 10px; 
         background-color: white; 
         margin: 6px;
+        text-align: center;
     }   
 
     .save{
@@ -244,6 +258,14 @@ i{
     }
 
     .total-likes{
+        font-size: 16px;
+    }
+
+    .btn-config{
+        font-size: 30px;
+    }
+
+    .label-config{
         font-size: 16px;
     }
 }
