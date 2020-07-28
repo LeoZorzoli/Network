@@ -56,11 +56,22 @@ def register(request):
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
+        if not username:
+            return render(request, "network/register.html", {
+                "message": "*Not username."})
+        if not email:
+            return render(request, "network/register.html", {
+                "message": "*Not email."})
+
+        if not password:
+            return render(request, "network/register.html", {
+                "message": "Not password."
+            })
+
         if password != confirmation:
             return render(request, "network/register.html", {
                 "message": "Passwords must match."
             })
-
         # Attempt to create new user
         try:
             user = User.objects.create_user(username, email, password)
