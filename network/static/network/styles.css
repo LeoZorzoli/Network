@@ -23,9 +23,24 @@ i{
         font-size: 74px;
     }
     
-    .likebutton ,.edit{
+    .likebutton ,.edit, .delete{
         font-size: 32px;
         color:#454545;
+    }
+
+    .delete{
+        margin-left: 20px;
+        background-color: transparent;
+        border: none;
+    }
+
+    .edit{
+        background-color: transparent;
+        border: none;
+    }
+
+    .edit:hover, .delete:hover{
+        color: grey;
     }
     
     .card-header{
@@ -139,6 +154,31 @@ i{
     .label-config{
         font-size: 36px;
     }
+
+    .btn-modal-newpost{
+        background-color: #f2f2f2;
+        width: 100%;
+        border: 0.5px solid #a3a3a3;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 46px;
+    }
+
+    .new-post-content{
+        background-color: #f0f0f0;
+    }
+
+    .modal-title, .modal-body{
+        font-size: 46px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    }
+
+    .close{
+        font-size: 50px;
+    }
+
 }
 
 @media only screen and (min-width: 1025px){
@@ -163,9 +203,19 @@ i{
         font-size: 26px;
     }
     
-    .likebutton ,.edit{
+    .likebutton ,.edit, .delete{
         font-size: 16px;
         color:#454545;
+    }
+
+    .delete{
+        margin-left: 20px;
+        background-color: transparent;
+        border: none;
+    }
+
+    .delete:hover{
+        color: grey;
     }
     
     .card-header{
@@ -235,7 +285,7 @@ i{
     }
 
     .form-control{
-        font-size: 16px;
+        font-size: 26px;
     }
 
     .login{
@@ -275,6 +325,29 @@ i{
 
     .label-config{
         font-size: 16px;
+    }
+
+    .btn-modal-newpost{
+        background-color: #f2f2f2;
+        width: 100%;
+        border: 0.5px solid #a3a3a3;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 26px;
+    }
+
+    .new-post-content{
+        background-color: #f0f0f0;
+    }
+
+    .modal-title, .modal-body{
+        font-size: 26px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .close{
+        font-size: 26px;
     }
 
 }
