@@ -20,8 +20,8 @@
     {% endif %}  
     </h4>
     <p><span class="btn-total-follow">{{posts}} Posts </span>
-        <button type="button" class="btn-total-follow" data-toggle="modal" data-target="#followers">{{totalfollower}} Followers </button>
-        <button type="button" class="btn-total-follow" data-toggle="modal" data-target="#following">{{totalfollowing}} Following </button>
+        <button type="button" class="btn-total-follow follows" data-toggle="modal" data-target="#followers">{{totalfollower}} Followers </button>
+        <button type="button" class="btn-total-follow follows" data-toggle="modal" data-target="#following">{{totalfollowing}} Following </button>
     </p>
     {% if user.username != profileuser.username %}
         {% if not followingEachOther %}
