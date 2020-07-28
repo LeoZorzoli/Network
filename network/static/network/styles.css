@@ -179,6 +179,15 @@ i{
         font-size: 50px;
     }
 
+    .message{
+        font-size: 60px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 60px;
+        color: #666666;
+    }
+
 }
 
 @media only screen and (min-width: 1025px){
@@ -350,4 +359,12 @@ i{
         font-size: 26px;
     }
 
+    .message{
+        font-size: 40px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 60px;
+        color: #666666;
+    }
 }

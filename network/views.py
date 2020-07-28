@@ -160,7 +160,7 @@ def following(request, username):
                     posted.append(p)
         
         if not follows:
-            return render(request, 'network/following.html', {'message': "You don't follow anybody"})
+            return render(request, 'network/following.html', {'message': "Opps! You don't follow anybody."})
 
         paginator = Paginator(posted, 10)
         page_number = request.GET.get('page')
