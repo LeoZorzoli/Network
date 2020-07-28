@@ -4,8 +4,9 @@
 {% block body %}
 
     <div class="container">
-
-        <h4>{{message}}</h4>
+        {% if message %}
+        <h4 class="message">{{message}}</h4>
+        {% endif %}
     
         {% for post in page_obj %}
         <div class="card border-secondary mb-3">
@@ -28,6 +29,7 @@
         
     </div>
     <hr>
+    {% if not message %}
     <div class="container">
         <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
@@ -38,11 +40,12 @@
             <li class="page-item disabled"><a class="page-link">Previous</a></li>
             {% endif %}
                 
-    
-            
-                <li class="page-item"><a class="page-link">{{ page_obj.number }}</a></li>
-            
-    
+            {% if page_obj.number %}
+            <li class="page-item"><a class="page-link">{{ page_obj.number }}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link">0</a></li>
+            {% endif %}
+        
             {% if page_obj.has_next %}
             <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a></li>
             <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">Last &raquo;</a></li>
@@ -52,4 +55,5 @@
             {% endif %}
         </ul>
     </div>
+    {% endif %}
 {% endblock %}
