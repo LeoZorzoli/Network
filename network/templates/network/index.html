@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body %}
-
+{% if user.is_authenticated %}
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-modal-newpost border-secondary" data-toggle="modal" data-target="#create">What are you thinking, {{request.user.first_name}}?</button>
   
@@ -29,7 +29,7 @@
       </div>
     </div>
   </div>
-
+{% endif %}
 {% for post in page_obj %}
 <div class="card border-secondary mb-3">
     <h5 class="card-header"><a href="{% url 'profile' username=post.user %}">{{post.user|title}}</a></h5>
