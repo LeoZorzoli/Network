@@ -132,15 +132,20 @@ def profile(request, username):
 
 
 def newpost(request, username):
-    if request.method == 'GET':
-        user = get_object_or_404(User, username=username)
-        return render(request, "network/newpost.html", {'user':user})
-    else:
+    if request.method == 'POST':
         user = get_object_or_404(User, username=username)
         textarea = request.POST["textarea"]
+        if not textarea:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         post = Post.objects.create(content=textarea, user=user)
         post.save()
-        return redirect("index")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+def delete(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    if request.method == 'POST':
+        post.delete()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 def following(request, username):
@@ -165,17 +170,12 @@ def following(request, username):
 
 
 def edit(request, post_id):
-    if request.method == 'GET':
+    if request.method == 'POST':
         post = Post.objects.get(pk=post_id)
-        return render(request, 'network/edit.html', {'post_id': post_id, 'edit': Edit(initial={'textarea': post.content})})
-    else:
-        post = Post.objects.get(pk=post_id)
-        form = Edit(request.POST) 
-        if form.is_valid():
-            textarea = form.cleaned_data["textarea"]
-            post.content = textarea
-            post.save()
-            return redirect('index')
+        textarea = request.POST["textarea"]
+        post.content = textarea
+        post.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 
