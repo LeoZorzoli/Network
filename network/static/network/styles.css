@@ -188,6 +188,11 @@ i{
         color: #666666;
     }
 
+    .data-info{
+        font-size: 36px;
+        color: red;
+    }
+
 }
 
 @media only screen and (min-width: 1025px){
@@ -366,5 +371,10 @@ i{
         margin-top: 60px;
         margin-bottom: 60px;
         color: #666666;
+    }
+
+    .data-info{
+        font-size: 16px;
+        color: red;
     }
 }
