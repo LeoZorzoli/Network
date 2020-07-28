@@ -4,7 +4,7 @@
 
 <div class="container login">
     {% if message %}
-        <div>{{ message }}</div>
+        <div class="data-info">{{ message }}</div>
     {% endif %}
 
     <form action="{% url 'config' username=request.user %}" method="post">

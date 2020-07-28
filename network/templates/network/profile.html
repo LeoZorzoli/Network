@@ -78,7 +78,13 @@
   </div>
     
 {% if user.username == profileuser.username %}
-<button type="button" class="btn btn-modal-newpost border-secondary" data-toggle="modal" data-target="#create">What are you thinking, {{request.user.first_name}}?</button>
+<button type="button" class="btn btn-modal-newpost border-secondary" data-toggle="modal" data-target="#create">What are you thinking, 
+  {% if request.user.first_name %}
+      {{request.user.first_name|title}}?
+  {% else %}
+      {{request.user.username|title}}?
+  {% endif %}
+</button>
 
   <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

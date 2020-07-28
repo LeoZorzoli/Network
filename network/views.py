@@ -59,26 +59,31 @@ def register(request):
         if not username:
             return render(request, "network/register.html", {
                 "message": "*Not username."})
+        
         if not email:
             return render(request, "network/register.html", {
                 "message": "*Not email."})
 
         if not password:
             return render(request, "network/register.html", {
-                "message": "Not password."
-            })
+                "message": "*Not password."})
 
         if password != confirmation:
             return render(request, "network/register.html", {
-                "message": "Passwords must match."
-            })
+                "message": "*Passwords must match."})
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username, email, password)
-            user.save()
+            email_already = User.objects.filter(email=email)
+            if not email_already:
+                user = User.objects.create_user(username, email, password)
+                user.save()
+            else:
+                return render(request, "network/register.html", {
+                "message": "*Email already taked."
+            })
         except IntegrityError:
             return render(request, "network/register.html", {
-                "message": "Username already taken."
+                "message": "*Username already taked."
             })
         login(request, user)
         return redirect("config", username)
@@ -226,6 +231,10 @@ def config(request, username):
         profile = User.objects.get(username=username)
         profile.first_name = first_name
         profile.last_name = last_name
-        profile.email = email
+        email_already = User.objects.filter(email=email)
+        if not email_already or profile.email == email:
+            profile.email = email
+        else:
+            return render(request, "network/config.html", {'profile': profile, 'message': '*Email already taked.'})
         profile.save()
         return redirect('profile', profile.username)
