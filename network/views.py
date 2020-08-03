@@ -108,9 +108,18 @@ def profile(request, username):
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
 
-            return render(request, "network/profile.html", {'posts': posts.count(), 'profileuser': profileuser,
-            'page_obj': page_obj, 'follower': follower, 'totalfollower':totalfollower, 'following': following, 'totalfollowing': totalfollowing,
-            'followingEachOther': following_each_other})
+            context = {
+                'posts': posts.count(),
+                'profileuser': profileuser,
+                'page_obj': page_obj,
+                'follower': follower,
+                'totalfollower': totalfollower,
+                'following': following,
+                'totalfollowing': totalfollowing,
+                'followingEachOther': following_each_other
+            }
+
+            return render(request, "network/profile.html", context)
         
     else:
         currentuser = request.user
@@ -129,10 +138,18 @@ def profile(request, username):
             totalfollower = len(follower)
             totalfollowing = len(following)
 
-            return render(request, "network/profile.html", {'posts': posts.count(), 'profileuser': profileuser, 
-            'page_obj': page_obj, 'follower': follower, 'following': following,
-            'totalfollowing': totalfollowing, 'totalfollower': totalfollower,
-            'followingEachOther': following_each_other})
+            context = {
+                'posts': posts.count(),
+                'profileuser': profileuser,
+                'page_obj': page_obj,
+                'follower': follower,
+                'following': following,
+                'totalfollowing': totalfollowing,
+                'totalfollower': totalfollower,
+                'followingEachOther': following_each_other
+            }
+
+            return render(request, "network/profile.html", context)
 
         else:
             following_each_other.delete()
@@ -140,11 +157,19 @@ def profile(request, username):
             following = Profile.objects.filter(follower=profileuser)
             totalfollower = len(follower)
             totalfollowing = len(following)
+
+            context = {
+                'posts': posts.count(),
+                'profileuser': profileuser,
+                'page_obj': page_obj,
+                'follower': follower,
+                'following': following,
+                'totalfollowing': totalfollowing,
+                'totalfollower': totalfollower,
+                'followingEachOther': following_each_other
+            }
        
-            return render(request, "network/profile.html", {'posts': posts.count(), 'profileuser': profileuser, 
-            'page_obj': page_obj, 'follower': follower, 'following': following, 
-            'totalfollowing': totalfollowing, 'totalfollower': totalfollower,
-            'followingEachOther': following_each_other})
+            return render(request, "network/profile.html", context)
 
 
 def newpost(request, username):
