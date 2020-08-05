@@ -40,7 +40,10 @@ def login_view(request):
                 "message": "Invalid username and/or password."
             })
     else:
-        return render(request, "network/login.html")
+        if request.user.is_anonymous:
+            return render(request, "network/login.html")
+        else: 
+            return redirect('index')
 
 
 def logout_view(request):
@@ -88,7 +91,10 @@ def register(request):
         login(request, user)
         return redirect("config", username)
     else:
-        return render(request, "network/register.html")
+        if request.user.is_anonymous:
+            return render(request, "network/register.html")
+        else:
+            return redirect('index')
 
 
 def profile(request, username):
