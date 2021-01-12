@@ -1,4 +1,5 @@
 from django import forms
+import json
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -7,6 +8,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
+from django.forms.models import model_to_dict
 
 from .models import User, Post, Profile, Like
 
@@ -181,10 +184,10 @@ def profile(request, username):
 def newpost(request, username):
     if request.method == 'POST':
         user = get_object_or_404(User, username=username)
-        textarea = request.POST["textarea"]
-        if not textarea:
+        post_content = request.POST["textarea"]
+        if not post_content:
             return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-        post = Post.objects.create(content=textarea, user=user)
+        post = Post.objects.create(content=post_content, user=user)
         post.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
@@ -192,7 +195,8 @@ def delete(request, post_id):
     post = Post.objects.get(pk=post_id)
     if request.method == 'POST':
         post.delete()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        payload = {'success': True}
+        return HttpResponse(json.dumps(payload), content_type='application/json')
 
 
 def following(request, username):
@@ -222,7 +226,7 @@ def edit(request, post_id):
         textarea = request.POST["textarea"]
         post.content = textarea
         post.save()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        return HttpResponse('success')
 
 
 

@@ -101,7 +101,7 @@
                 <textarea rows="10" class="form-control" name="textarea"></textarea>
                 <br>
                 <div class="modal-footer">
-                    <button class="btn btn-outline-dark save" type="submit" value="Create"><i class="fa fa-check-square-o"></i> Create</button>
+                    <button class="btn btn-outline-dark save" data-username="{{request.user.username}}" type="submit" value="Create"><i class="fa fa-check-square-o"></i> Create</button>
                 </div>
             </form>
         </div>
@@ -112,17 +112,17 @@
 
 <div class="container">
     {% for post in page_obj %}
-    <div class="card border-secondary mb-3">
+    <div class="card border-secondary mb-3 post-object{{post.id}}">
         <h5 class="card-header"><a href="{% url 'profile' username=post.user %}">{{post.user|title}}</a></h5>
         <div class="card-body text-secondary">
             <h6 class="card-subtitle mb-2 text-muted">{{post.date}}</h6>
-            <p class="card-text">{{post.content}}</p>
+            <p class="card-text post-object-content{{post.id}}">{{post.content}}</p>
             {% if user.is_authenticated %}
                 {% if request.user == post.user %}
                 <!-- MODAL EDIT BUTTON-->
                 <button type="button" class="edit" data-toggle="modal" data-target="#edit">Edit</button>
                 <!-- MODAL DELETE BUTTON-->
-                <button type="button" class="delete" data-toggle="modal" data-target="#delete">Delete</button>
+                <button type="button" class="delete delete-post" data-catid="{{post.id}}">Delete</button>
                 {% elif request.user in post.liked.all %}
                     <a class="likebutton" href="#" data-catid="{{ post.id }}" id="{{post.id}}" data-total="{{post.liked.all.count}}"  data-value="Unlike" value="submit"><i class="fa fa-heart" id="heart{{post.id}}" style="color:red;"></i><span id="liked{{post.id}}">{{post.liked.all.count}}</span></a>
                     {% else %}
@@ -134,32 +134,8 @@
         </div>
     </div>
 
-    
-  <!-- Modal DELETE -->
-  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog" role="document">
-      <div class="modal-content new-post-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Delete Post</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete this post?</p>
-            <div class="modal-footer">
-                <form method=post action="{% url 'delete' post_id=post.id %}">
-                    {% csrf_token %}
-                  <button class="btn btn-outline-danger save" type="submit" value="Delete"><i class="fa fa-check-square-o"></i> Delete</button>
-                </form>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Modal EDIT -->
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade modal-edit" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content new-post-content">
       <div class="modal-header">
@@ -171,10 +147,10 @@
       <div class="modal-body">
           <form method=post action="{% url 'edit' post_id=post.id %}">
               {% csrf_token %}
-              <textarea rows="10" class="form-control" name="textarea">{{post.content}}</textarea>
+              <textarea rows="10" class="form-control textarea-edit" name="textarea">{{post.content}}</textarea>
               <br>
               <div class="modal-footer">
-                  <button class="btn btn-outline-dark save" type="submit" value="Save"><i class="fa fa-check-square-o"></i>Edit</button>
+                  <button class="btn btn-outline-dark save edit-post" data-catid="{{post.id}}" type="submit" value="Save"><i class="fa fa-check-square-o"></i>Edit</button>
               </div>
           </form>
       </div>

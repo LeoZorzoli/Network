@@ -32,7 +32,7 @@
                         </ul>
                         <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" title="Log In" href="{% url 'login' %}"><i class="fa fa-drivers-license-o"></i></a>
+                                    <a class="nav-link" title="Log In" href="{% url 'login' %}"><i class="fa fa-sign-in"></i></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" title="Register" href="{% url 'register' %}"><i class="fa fa-plus-square"></i></a>
@@ -83,6 +83,44 @@
             })
 
             
+        })
+
+        
+        $('.delete-post').click(function () {
+            var postId = $(this).data("catid")
+
+            $.ajax({
+            type: "POST",
+            url: `/${postId}/delete`,
+            data: {
+                csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                post_id: postId
+            },
+            success: function(data) {
+                $(`.post-object${postId}`).remove()
+            }
+            })
+        })
+
+        $('.edit-post').click(function (event) {
+            event.preventDefault()
+            var postId = $(this).data("catid")
+            var content = $('.textarea-edit').val()
+
+            $.ajax({
+            type: "POST",
+            url: `/posts/${postId}/edit`,
+            data: {
+                csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                post_id: postId,
+                textarea: content
+            },
+            success: function(data) {
+                $('.modal-edit').modal('hide')
+                var content = $('.textarea-edit').val()
+                $(`.post-object-content${postId}`).html(content)
+            }
+            })
         })
 
         $(function() {
